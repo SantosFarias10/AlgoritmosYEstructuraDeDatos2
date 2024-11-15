@@ -79,8 +79,6 @@ unsigned int array_from_file(int array[], unsigned int max_size, const char *fil
     }
     /* hacemos un bucle para ir guardando los elementos en el array, usamos fscanf() para leer los elementos y almacenarlos en array[i] en su respectiva posición y ademas comprobamos si fscanf no pudo leer un entero (fscanf devuelve 1 si la lectura es exitosa) si es que falla entonces imprimimos un mensaje de error, cerramos el file y terminamos el programa */
 
-
-
     fclose(file);
     /* Cerramos la ruta */
 

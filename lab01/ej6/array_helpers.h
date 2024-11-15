@@ -13,5 +13,7 @@ bool array_is_sorted(int a[], unsigned int length);
 
 void array_swap(int a[], unsigned int i, unsigned int j);
 
+void array_swap(int a[], unsigned int i, unsigned int j);
+
 #endif
 

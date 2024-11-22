@@ -15,12 +15,7 @@ void swap(fixstring a[], unsigned int i, unsigned int j) {
 }
 
 bool goes_before(fixstring x, fixstring y) {
-    unsigned int i = 0;
-
-    while (x[i] != '\0' && y[i] != '\0' && x[i] == y[i]){
-        i++;
-    }
-    return x[i] < y[i];
+    return fstring_length(x) <= fstring_length(y);
 }
 
 bool array_is_sorted(fixstring array[], unsigned int length) {
@@ -30,4 +25,3 @@ bool array_is_sorted(fixstring array[], unsigned int length) {
     }
     return (i >= length);
 }
-

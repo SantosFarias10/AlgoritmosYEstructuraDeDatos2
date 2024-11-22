@@ -7,6 +7,7 @@
 #include "array_helpers.h"
 #include "fixstring.h"
 #include "sort_helpers.h"
+#include "sort_helpers_b.h"
 #include "sort.h"
 
 /* Maximum allowed length of the array */

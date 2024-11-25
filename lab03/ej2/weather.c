@@ -9,9 +9,18 @@ static const int AMOUNT_OF_WEATHER_VARS = 6 ;
 
 Weather weather_from_file(FILE* file)
 {
-    Weather weather;
-    /* Completar aqui */
-    return weather;
+  Weather weather;
+
+  int res = fscanf(file, EXPECTED_WEATHER_FILE_FORMAT, &weather._average_temp, &weather._max_temp, &weather._min_temp, &weather._pressure, &weather._moisture, &weather._rainfall);
+
+  if(res != AMOUNT_OF_WEATHER_VARS){
+    fprintf(stderr, "Invalid array. There should only be %d Weather Variables.\n", AMOUNT_OF_WEATHER_VARS);
+    exit(EXIT_FAILURE);
+  }
+
+  return weather;
+
+  return weather;
 }
 
 void weather_to_file(FILE* file, Weather weather)

@@ -38,7 +38,7 @@ void array_dump(WeatherTable a) {
     }
 }
 
-
+/* lee un array de informacion meteorologica desde un archivo */
 void array_from_file(WeatherTable array, const char *filepath) {
     FILE *file = NULL;
 
@@ -53,12 +53,34 @@ void array_from_file(WeatherTable array, const char *filepath) {
     unsigned int k_day = 0u;
     while (!feof(file)) {
         int res = fscanf(file, " %u %u %u ", &k_year, &k_month, &k_day);
+        
         if (res != 3) {
             fprintf(stderr, "Invalid array.\n");
             exit(EXIT_FAILURE);
         }
-        Weather weather = weather_from_file(file);
-        /* Completar acá: Guardar la medición de clima en el arreglo multidimensional */
+        
+        Weather weather = weather_from_file(file);  /* lee mediciones meteorologicas de una linea de archivo, retorna una estructura weather que contiene la informacion leida del archiva */
+        
+        if(year_month_day_between_defines(k_year, k_month, k_day)){
+            array[k_year - 1980][k_month - 1][k_day - 1] = weather; /* guarda la informacion meteorologica en la posicion correspondiente del array */
+        } else {
+            fprintf(stderr, "Invalid year/month/day.\n");
+            exit(EXIT_FAILURE);
+        }
     }
+
     fclose(file);
+}
+
+/* La función verifica si una fecha especifica (año, mes, dia) esta dentro de un rango definido */
+bool year_month_day_between_defines(unsigned int k_year, unsigned int k_month, unsigned int k_day){
+    if((k_year <= LST_YEAR) && (k_year >= FST_YEAR) && (k_day <= LST_DAY) && (k_day >= FST_DAY)){
+        for(month_t month = january; month <= december; month++){
+            if((k_month - 1) == month){
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

@@ -12,8 +12,7 @@
 #include "player.h"
 
 bool goes_before(player_t x, player_t y){
-    // completar aquí
-    return true;
+    return (*x).rank <= y->rank;    /* Notar que las dos formas son los mismo  [ (*x).rank == x->rank] */
 }
 
 bool array_is_sorted(player_t atp[], unsigned int length) {
@@ -24,7 +23,51 @@ bool array_is_sorted(player_t atp[], unsigned int length) {
     return (i == length);
 }
 
-void sort(player_t a[], unsigned int length) {
-    // completar aquí
+void swap(player_t a[], unsigned int i, unsigned int j) {
+    player_t aux;
+    aux = a[i];
+    a[i] = a[j];
+    a[j] = aux;
 }
 
+unsigned int partition(player_t a[], unsigned int izq, unsigned int der) {
+    unsigned int ppiv, i, j;
+    ppiv = izq;
+    i = izq + 1u;
+    j = der;
+
+    while (i <= j) {
+        if (goes_before(a[i],a[ppiv])) {
+            i++;
+        } else if (goes_before(a[ppiv],a[j])) {
+            j--;
+        } else {
+            swap(a,i,j);
+            i++;
+            j--;
+        }
+    }
+    swap(a,ppiv,j);
+    ppiv = j;
+
+    return ppiv;
+}
+
+void quick_sort_rec(player_t a[], unsigned int izq, unsigned int der) {
+    unsigned int pivot = partition(a, izq, der);
+
+    if (izq < pivot){
+        quick_sort_rec(a, izq, pivot-1);
+    }
+    if (pivot < der) {
+        quick_sort_rec(a, pivot+1, der);
+    }
+}
+
+void sort(player_t a[], unsigned int length) {
+    quick_sort_rec(a, 0u, (length == 0u) ? 0u : length - 1u);
+}
+
+/*
+    * Funciona mas rapida es la de la version con punteros, ya que ahora los intercambios de funcion swap se realizan mas rapido, porque son punteros. xd
+*/

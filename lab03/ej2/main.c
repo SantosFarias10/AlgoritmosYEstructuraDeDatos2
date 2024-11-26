@@ -71,6 +71,27 @@ int main(int argc, char *argv[]) {
     array_from_file(array, filepath);
 
     /* show the ordered array in the screen */
+    int tem_min = temp_min(array);
+    printf("La Menor Temperatura Minima Historica Registrada es %d\n", tem_min);
+
+
+    int temps_maxs[YEARS];
+    temps_maxs_totales(array, temps_maxs);
+    printf("Las Mayores Temperaturas Maximas de cada Año son\n");
+    for (unsigned int i = 0; i < YEARS; i++) {
+        printf("%u: %d\n", (i+1980), temps_maxs[i]);
+    }
+
+    month_t precips_maxs[YEARS];
+    precips_maxs_mensuales(array, precips_maxs);
+    printf("Los Meses con mas precipitaciones de cada Año son\n");
+    for (unsigned int i = 0; i < YEARS; i++) {
+        printf("%u: %u\n", (i+1980), (precips_maxs[i]+1));
+    }
+
+
+
+    /* show the ordered array in the screen */
     array_dump(array);
 
     return (EXIT_SUCCESS);

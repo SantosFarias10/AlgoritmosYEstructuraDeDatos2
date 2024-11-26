@@ -18,27 +18,36 @@ typedef struct _person {
  */
 int main(void) {
 
-    int x = 1;
-    person_t m = {90, 'M'};
-    int a[] = {0, 1, 2, 3};
+  int x = 1;
+  person_t m = {90, 'M'};
+  int a[] = {0, 1, 2, 3};
 
-    /* Completar aquí:
-       Al finalizar la ejecución las variables deben tener los siguientes valores
-       x = 9
-       m = (100, F)
-       a[1] = 42
+  int *p = NULL;
+  char *q = NULL;
 
-       Las restricciones son:
-       - No usar las variables 'x', 'm' y 'a' en la parte izquierda de alguna asignación.
-       - Se pueden agregar líneas de código, pero no modificar las que ya existen.
-       - Se pueden declarar hasta 2 punteros.
-       AYUDA: podes usar GDB para consultares valores de variables y la dirección de memoria donde estan alojadas.
-    */
+  p = &x;
+  *p = 9;
 
-    printf("x = %d\n", x);
-    printf("m = (%d, %c)\n", m.age, m.name_initial);
-    printf("a[1] = %d\n", a[1]);
+  p = &m.age;
+  *p = 100;
 
-    return EXIT_SUCCESS;
+  q = &m.name_initial;
+  *q = 'F';
+
+  p = &a[1];
+  *p = 42;
+
+  /*  
+    Al finalizar la ejecución las variables deben tener los siguientes valores
+      x = 9
+      m = (100, F)
+      a[1] = 42
+  */
+
+  printf("x = %d\n", x);
+  printf("m = (%d, %c)\n", m.age, m.name_initial);
+  printf("a[1] = %d\n", a[1]);
+
+  return EXIT_SUCCESS;
 }
 

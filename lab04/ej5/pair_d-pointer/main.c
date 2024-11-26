@@ -4,7 +4,8 @@
 
 static
 void show_pair(pair_t p) {
-    printf("(%d, %d)\n", pair_first(p), pair_second(p));
+    printf("(%d, %d)\n", pair_first(p), pair_second(p)); /*fallaba ya que accediamos a los componentes de p a traves del puntero
+                                                            lo cambiamos por las funciones que nos devuelven el primer y segundo elemento*/
 }
 
 int main(void) {
@@ -24,7 +25,3 @@ int main(void) {
     q = pair_destroy(q);
     return EXIT_SUCCESS;
 }
-
-/*
-    La diferencia entra la especificacion del ejercicio anterior y esta, es que en esta es mas abstracta, ya que en vez de implementar con el tipo INT, se usa un nuevo tipo que es enum
-*/

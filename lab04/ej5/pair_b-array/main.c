@@ -4,7 +4,7 @@
 
 static
 void show_pair(pair_t p) {
-    printf("(%d, %d)\n", pair_first(p), pair_second(p));
+    printf("(%d, %d)\n", p.values[0], p.values[1]);
 }
 
 int main(void) {
@@ -20,11 +20,15 @@ int main(void) {
     printf("q = ");
     show_pair(q);
     // Se destruyen p y q
-    p = pair_destroy(p);
+    p = pair_destroy(p); /*¿Se libera espacio de memoria con mi implementacion de pair_destroy?*/
     q = pair_destroy(q);
     return EXIT_SUCCESS;
 }
 
 /*
-    La diferencia entra la especificacion del ejercicio anterior y esta, es que en esta es mas abstracta, ya que en vez de implementar con el tipo INT, se usa un nuevo tipo que es enum
+    I) Falla ya que show_pair estaba definido para el TAD del ejercicio anterior, habria que cambiarlo por la nueva definicion
+*/
+
+/*
+    III) No se logra el encapsulamiento ya que se deben utilizar los indices del arreglo para acceder a ellos
 */

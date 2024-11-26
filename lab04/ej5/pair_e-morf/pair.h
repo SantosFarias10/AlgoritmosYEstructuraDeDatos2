@@ -4,6 +4,11 @@
 typedef struct s_pair_t * pair_t;
 typedef int elem;
 
+struct s_pair_t { /*copie la misma struct del ejercicio anterior*/
+    int fst;
+    int snd;
+};
+
 pair_t pair_new(elem x, elem y);
 /*
  * DESC: Creates a new pair with components (x, y)

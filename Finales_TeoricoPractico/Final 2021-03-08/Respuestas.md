@@ -89,8 +89,12 @@ Cagao_hambre(N, M)
 
 ### (c)
 
+    cagao_hambre(i, j) =
+               | 0  --->  si (i = 0) ^ (j > 0) (Caso donde no tenemos mas productos)
 
+               | cagao_hambre(i - 1, j)  --->  si (p_i > j > 0) ^ (i > 0) (Caso donde no nos alcanza para comprar el producto)
 
+               | max(s_i + cagao_hambre(i - 1, j - p_i), cagao_hambre(i - 1, j))  --->  si (p_i < j) ^ (i > 0) (Caso donde decidimos si vale la pena comprar el producto o no)
 
 ---
 

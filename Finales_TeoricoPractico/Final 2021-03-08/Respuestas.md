@@ -89,14 +89,7 @@ Cagao_hambre(N, M)
 
 ### (c)
 
-$$
-\text{cagao\_hambre}(i, j) =
-\begin{cases} 
-0 & \text{si } (i = 0) \wedge (j > 0) \\
-\text{cagao\_hambre}(i - 1, j) & \text{si } (p_i > j > 0) \wedge (i > 0) \\
-\max(s_i + \text{cagao\_hambre}(i - 1, j - p_i), \text{cagao\_hambre}(i - 1, j)) & \text{si } (p_i \leq j) \wedge (i > 0)
-\end{cases}
-$$
+
 
 
 ---

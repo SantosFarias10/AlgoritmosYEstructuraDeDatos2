@@ -26,7 +26,7 @@ static struct s_node * create_node(pqueue_elem e) {
     new_node->elem = e;
     new_node->next = NULL;
 
-    return new_node;
+    return new_node; 
 }
 
 /* Destruimos un nodo liberando la memoria y apuntandolo a un lugar NULL */

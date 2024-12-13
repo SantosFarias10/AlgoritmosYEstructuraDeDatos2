@@ -4,22 +4,57 @@
 #include "string.h"
 
 struct _dict_t {
-  /* COMPLETAR */
+  struct _node_t *words;
+  struct _node_t * definitions;
+  size_t size;
 };
 
 struct _node_t {
-  /* COMPLETAR */
+  string elem;
+  struct _node_t *next;
 };
 
 static bool invrep(dict_t d) {
-  /* COMPLETAR */
+  node_t word = d->words;
+  node_t def = d->definitions;
+  unsigned int count = 0u;
+
+  if(d == NULL){
+    return false;
+  } else {
+    if(dict_length(d) != d->size){
+      return false;
+    }
+
+    while(word != NULL && def != NULL){
+      count++;
+      word = word->next;
+      def = def->next;
+    }
+
+    if(count != dict_length(d)){
+      return false;
+    }
+
+    if(word != NULL || def != NULL){
+      return false;
+    }
+  }
+
+  return true;
 }
 
 // returns the amount of nodes to skip when adding a new word
+/* Devuelve la cantidad de nodos a saltar al agregar una nueva palabra, calcula la cantidad de nodos que se deben saltar al agregar una nueva palabra al diccionario. Esto puede ser útil si el diccionario está ordenado y se desea insertar la nueva palabra en la posición correcta. */
 static int nodes_to_skip(dict_t dict, string word) {
-  unsigned int numberToSkip = 0;
+  unsigned int numberToSkip = 0;  /* Inicializamos el contador de nodos a saltar */
+  node_t current = dict->words; /* Apunta a la primera palabra de la lista de palabras */
 
-  /* COMPLETAR */
+  /* Recorremos la lista mientras el nodo actual no sea NULL y la palabra en el nodo actual sea menor que la nueva palabra (alfabeticamente) */
+  while(current != NULL && string_compare(current->elem, word) < 0){
+    numberToSkip++; /* Incrementamos el contador */
+    current = current->next;  /* Avanzamos al siguiente nodo */
+  }
 
   return numberToSkip;
 }
@@ -29,15 +64,28 @@ static int nodes_to_skip(dict_t dict, string word) {
 static int find_index_of_key(dict_t dict, string word) {
   int index = 0;
 
-  /* COMPLETAR */
+  node_t aux = dict->words;
+
+  while(aux != NULL){
+    if(string_eq(aux->elem, word)){
+      return index;
+    } else {
+      index++;
+      aux = aux->next;
+    }
+  }
 
   return index;
 }
 
 dict_t dict_empty(void) {
+  dict_t dict = malloc(sizeof(struct _dict_t));
 
-    /* COMPLETAR */
+  dict->words = NULL;
+  dict->definitions = NULL;
+  dict->size = 0u;
 
+  assert(invrep(dict) && dict_length(dict) == 0);
 }
 
 static node_t create_node(string elem) {

@@ -25,7 +25,7 @@ static struct s_node * create_node(pstack_elem e, priority_t priority) {
 
     new_node->next = NULL;
 
-    return new_node;
+    return new_node; 
 }
 
 static struct s_node * destroy_node(struct s_node *node) {

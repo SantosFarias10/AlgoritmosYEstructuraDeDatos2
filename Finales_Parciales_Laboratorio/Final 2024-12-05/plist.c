@@ -265,3 +265,45 @@ plist plist_destroy(plist l) {
     return l;
 }
 
+/* Quita todos las duplicaciones del elemento e de la lista (solo queda el primer elemento encontrado) */
+plist_remove_duplicates(plist l, t_elem e){
+    assert(!t_elem_eq(e, l->pivot));
+
+    if(t_elem_less(e, l->pivot)){
+        node_t aux = l->lft;
+        node_t prev = NULL;
+        while(aux != NULL){
+            if(t_elem_eq(e, aux->elem)){
+                if(prev == NULL){
+                    l->lft = aux->next;
+                } else {
+                    prev->next = aux->next;
+                }
+                l->length--;
+                destroy_node(aux);
+                break;
+            }
+            prev = aux;
+            aux = aux->next;
+        }
+    } else {
+        node_t aux = l->rgt;
+        node_t prev = NULL;
+        while(aux != NULL){
+            if(t_elem_eq(e, aux->elem)){
+                if(prev == NULL){
+                    l->rgt = aux->next;
+                } else {
+                    prev->next = aux->next;
+                }
+                l->length--;
+                destroy_node(aux);
+                break;
+            }
+            prev = aux;
+            aux = aux->next;
+        }
+    }
+
+    return l;
+}

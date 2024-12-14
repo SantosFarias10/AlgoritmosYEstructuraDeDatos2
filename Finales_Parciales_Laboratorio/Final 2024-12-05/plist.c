@@ -16,7 +16,7 @@ struct s_plist {
     unsigned int length;
     node_t lft;
     node_t rgt;
-    t_elem pivot;
+    t_elem pivot; 
 };
 
 /* Creates a single node in dynamic memory containing the element <e>. */

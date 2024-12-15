@@ -44,8 +44,8 @@ static bool valid_player(int p) {
 }
 
 static bool invrep(card c) {
-    bool valid_card=false;
-    valid_card = c!=NULL &&
+    bool valid_card = false;
+    valid_card = c != NULL &&
                   1 <= c->number && c->number <= 13 &&
                   valid_suit(c->suit) &&
                   valid_player(c->player);
@@ -56,10 +56,14 @@ static bool invrep(card c) {
 
 card card_new(unsigned int num, char suit, unsigned int player) {
   assert(1 <= num && num <= 13 && valid_suit(suit) && valid_player(player));
-  /*
-  * COMPLETAR
-  *
-  */
+
+  card new_card = malloc(sizeof(struct _s_card));
+
+  new_card->number = num;
+  new_card->player = player;
+  new_card->suit = suit;
+
+  return new_card;
 }
 
 unsigned int card_player(card c) {
@@ -83,17 +87,23 @@ char card_suit(card c) {
 }
 
 bool card_equal_color(card fst, card snd) {
-  /*
-  * COMPLETAR
-  *
-  */
+  return (card_color(fst) == card_color(snd));
 }
 
 unsigned int card_pair_points(card fst, card snd, unsigned int player) {
-  /*
-  * COMPLETAR
-  *
-  */
+  unsigned int points = 0u;
+  
+  if(player == 1){
+    if(card_equal_color(fst, snd)){
+      points = 1u;
+    }
+  } else {
+    if(card_number(fst) == card_number(snd)){
+      points = 10u;
+    }
+  }
+
+  return points;
 }
 
 void card_dump(card c) {
@@ -102,8 +112,7 @@ void card_dump(card c) {
 }
 
 card card_destroy(card c) {
-  /*
-  * COMPLETAR
-  *
-  */
+  free(c);
+  c = NULL;
+  return c;
 }

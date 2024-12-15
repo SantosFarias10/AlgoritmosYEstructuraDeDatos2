@@ -65,7 +65,7 @@ read_cards_from_file(FILE* file, card cards[], unsigned int max_read) {
   for (unsigned int i=0; i < length; i++) {
     unsigned int num=0, player=0;
     char suit;
-    readed = fscanf(file, "%d:%c:%d", &num, &suit, &player);
+    readed = fscanf(file, "%u:%c:%u", &num, &suit, &player);
     if (readed != 3) {
       printf("Error reading %d-th card\n", i);
       exit(EXIT_FAILURE);

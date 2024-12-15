@@ -146,7 +146,7 @@ end fun
 ```
 
 ---
-# (3)
+# (3) Comprensión de algoritmos
 
 ### (a)
 

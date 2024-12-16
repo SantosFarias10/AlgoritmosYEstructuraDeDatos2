@@ -8,7 +8,8 @@ typedef enum
 {
     Goal,
     YellowCard,
-    RedCard
+    RedCard,
+    WhiteCard
 } event;
 
 typedef enum
@@ -127,5 +128,17 @@ event *matchTimeline_events_array(matchTimeline mt);
  * @return matchTimeline luego de ser borrado
  */
 matchTimeline matchTimeline_destroy(matchTimeline mt);
+
+/**
+ * @brief Registra, si es posible, una tarjeta blanca a un jugador
+ * 
+ *  
+ * @param mt matchTimeline en el cual se crea el registro
+ * @param team equipo que registra el evento
+ * @param t minuto en que se registra el evento
+ * @param pn numero del jugador que recibe la tarjeta
+ * @return matchTimeline luego de registrarse el evento
+*/
+matchTimeline matchTimeline_receive_WhiteCard(matchTimeline mt, team team, time t, playerNumber pn);
 
 #endif // MATCH_TIMELINE_H

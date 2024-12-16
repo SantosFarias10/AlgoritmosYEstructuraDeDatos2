@@ -27,6 +27,9 @@ static void print_event_array(matchTimeline mt)
         case RedCard:
             e = "R";
             break;
+        case WhiteCard:
+            e = "W";
+            break;
         }
 
         fprintf(stdout, "%s ", e);
@@ -102,8 +105,20 @@ static void test_new_event_on_red_card()
 {
     matchTimeline mt = matchTimeline_empty();
 
-    // COMPLETAR
+    mt = matchTimeline_score_goal(mt, Home, 2, 10);
+    mt = matchTimeline_receive_yellowCard(mt, Away, 11, 4);
+    mt = matchTimeline_receive_yellowCard(mt, Away, 13, 4);
+    mt = matchTimeline_score_goal(mt, Away, 20, 4);
+    mt = matchTimeline_receive_yellowCard(mt, Away, 40, 4);
 
+    assert(matchTimeline_is_time_and_score_valid(mt));
+    assert(matchTimeline_size(mt) == 4u);
+    assert(matchTimeline_get_score(mt, Home) == 1);
+    assert(matchTimeline_get_score(mt, Away) == 0);
+
+    matchTimeline_print(mt);
+    print_event_array(mt);
+    
     matchTimeline_destroy(mt);
 }
 
@@ -158,7 +173,46 @@ static void test_invalid_time_order()
     matchTimeline_destroy(mt);
 }
 
+static void test_valid_Whitecard()
+{
+    matchTimeline mt = matchTimeline_empty();
+    mt = matchTimeline_score_goal(mt, Home, 23, 10);
+    mt = matchTimeline_score_goal(mt, Home, 36, 11);
+    mt = matchTimeline_receive_yellowCard(mt, Home, 35, 24);
+    mt = matchTimeline_receive_WhiteCard(mt, Home, 80, 10);
 
+    assert(!matchTimeline_is_time_and_score_valid(mt));
+    assert(matchTimeline_size(mt) == 4);
+    assert(matchTimeline_get_score(mt, Home) == 2);
+    assert(matchTimeline_get_score(mt, Away) == 0);
+
+    matchTimeline_print(mt);
+    print_event_array(mt);
+
+    // destroy mt
+    matchTimeline_destroy(mt);
+}
+
+static void test_invalid_Whitecard()
+{
+    matchTimeline mt = matchTimeline_empty();
+    mt = matchTimeline_score_goal(mt, Home, 23, 10);
+    mt = matchTimeline_score_goal(mt, Home, 36, 11);
+    mt = matchTimeline_receive_yellowCard(mt, Home, 35, 24);
+    mt = matchTimeline_receive_WhiteCard(mt, Home, 78, 24);
+    mt = matchTimeline_receive_WhiteCard(mt, Home, 80, 10);
+
+    assert(!matchTimeline_is_time_and_score_valid(mt));
+    assert(matchTimeline_size(mt) == 4);
+    assert(matchTimeline_get_score(mt, Home) == 2);
+    assert(matchTimeline_get_score(mt, Away) == 0);
+
+    matchTimeline_print(mt);
+    print_event_array(mt);
+
+    // destroy mt
+    matchTimeline_destroy(mt);
+}
 
 int main(void)
 {
@@ -180,6 +234,14 @@ int main(void)
 
     fprintf(stdout, "test_invalid_time_order <---------------\n");
     test_invalid_time_order();
+    fprintf(stdout, "\n");
+
+    fprintf(stdout, "test_valid_Whitecard<---------------\n");
+    test_valid_Whitecard();
+    fprintf(stdout, "\n");
+
+    fprintf(stdout, "test_invalid_Whitecard<---------------\n");
+    test_invalid_Whitecard();
     fprintf(stdout, "\n");
 
     return EXIT_SUCCESS;

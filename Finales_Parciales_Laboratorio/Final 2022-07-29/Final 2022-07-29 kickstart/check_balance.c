@@ -38,23 +38,36 @@ is_parenthesis(char c) {
 int main(int argc, char *argv[]) {
     // Parse arguments and get the expression to be analysed
     char *expression = parse_expression(argc, argv);
-    size_t expression_length= // COMPLETAR;
-    size_t i=0;
-    bool is_balanced=true;
+    size_t expression_length = strlen(expression);
+    size_t i = 0;
+    bool is_balanced = true;
     stack s = stack_empty();
 
     while (i < expression_length && is_balanced) {
         char chr = expression[i];
         if (is_parenthesis(chr)) {
-            /*
-             * COMPLETAR
-             *
-             */
+            if(chr == '('){
+                stack_push(s, '(');
+            } else {
+                if(stack_is_empty(s)){
+                    is_balanced = false;
+                } else {
+                    stack_elem *top = malloc(sizeof(stack_elem));
+                    stack_top(s, top);
+                    if(*top == '('){
+                        s = stack_pop(s);
+                    } else {
+                        is_balanced = false;
+                    }
+
+                    free(top);
+                }
+            }
         }
         i++;
     }
 
-    is_balanced = is_balanced && /* COMPLETAR */;
+    is_balanced = is_balanced && stack_is_empty(s);
 
     if (is_balanced) {
         printf(GREEN "The given expression is balanced\n" NOCOLOR);
@@ -63,7 +76,9 @@ int main(int argc, char *argv[]) {
 
     }
     // Free all memory used by the stack
-    // COMPLETAR
+
+    s = stack_destroy(s);
+
     return EXIT_SUCCESS;
 }
 

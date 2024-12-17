@@ -32,7 +32,7 @@ proc swap(in/out a: array[1...n] of T, in i, j: Nat)
 end proc
 ```
 
-![EjemploSelection_sort.png](/home/santos/Documents/NOBORRAR/EjemploSelection_sort.png)
+![EjemploSelection_sort.png](../Imagenes/EjemploSelection_sort)
 
 ---
 

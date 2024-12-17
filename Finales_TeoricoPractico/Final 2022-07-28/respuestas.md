@@ -82,12 +82,13 @@ La llamada principal es Ejercicio(n, B, Z, P)
 (n = i, j = B, x = Z, y = P)
 
     Ejercicio(i, j, x, y) = 
+                |   -infinito ---> si (((j < 0) || (x < 0) || (y < 0)) && (i > 0))  (si no tengo fuerza para hacer alguno de los ejercicios y todavia tengo ejercicios por hacer)
 
-                |   0  ---> si (i = 0)  (Caso donde no tengo mas ejercicios que hacer)
+                |   0  ---> si ((i = 0) && (j >= 0) && (x >= 0) && (y >= 0))  (Caso donde no tengo mas ejercicios que hacer)
 
-                |   Ejercicio(i - 1, j, x, y)  ---> si ((i > 0) && ((b_i > j) || (z_i > j) || (p_i > j)))   (Caso donde no tengo fuerza para hacer los ejercicios)
+                |   Ejercicio(i - 1, j, x, y)  ---> si ((i > 0) && ((b_i > j) || (z_i > j) || (p_i > j)))   (Caso donde el esfuerzo del ejercicio requiere mas energia de la que tengo)
 
-                |   max(e_i + Ejercicio(i - 1, j - b_i, x - z_i, y - p_i), Ejercicio(i - 1, j, x, y))  ---> si ((i > 0) && (j > b_i) && (x > z_i) && (y > p_i))  (Caso donde elijo si me conviene hacer el ejercicio o no)
+                |   max(e_i + Ejercicio(i, j - b_i, x - z_i, y - p_i), Ejercicio(i - 1, j, x, y))  ---> si ((i > 0) && (j > b_i) && (x > z_i) && (y > p_i))  (Caso donde elijo si me conviene hacer el ejercicio o no)
 
 ### (b) Programacion Dinamica
 

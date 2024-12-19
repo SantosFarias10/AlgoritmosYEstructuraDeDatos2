@@ -93,11 +93,17 @@ plist plist_add(plist l, t_elem e) {
     } else {
         if(t_elem_less(e, l->pivot)){
             node_t aux = l->lft;
-            while(aux->next != NULL){
-                aux = aux->next;
+            if(l->lft == NULL){
+                l->lft = new_node;
+                l->length++;
+                return l;
+            } else {
+                while(aux->next != NULL){
+                    aux = aux->next;
+                }
+                aux->next = new_node;
+                l->length++;
             }
-            aux->next = new_node;
-            l->length++;
         } else {
             new_node->next = l->rgt;
             l->rgt = new_node;
@@ -266,7 +272,7 @@ plist plist_destroy(plist l) {
 }
 
 /* Quita todos las duplicaciones del elemento e de la lista (solo queda el primer elemento encontrado) */
-plist_remove_duplicates(plist l, t_elem e){
+plist plist_remove_duplicates(plist l, t_elem e){
     assert(!t_elem_eq(e, l->pivot));
 
     if(t_elem_less(e, l->pivot)){
